@@ -33,6 +33,9 @@
 		 !empty($_POST["month"]) &&
 		 !empty($_POST["WorkoutHours"])
 	  ) {
+	  
+	  	//$daynumber = new DateTime($_POST['date']);
+	  	//$daynumber = $daynumber->format('Y-m-d');
 		
 		$gender=cleanInput($_POST["gender"]);
 		
