@@ -92,14 +92,14 @@
 	}
 	
 	
-	function savePeople ($gender, $age, $daynumber, $month, $WorkoutHours) {
+	function savePeople ($gender, $age, $month, $TypeOfTraining, $WorkoutHours, $feeling) {
 		
 		//ühendus
 		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
 		// käsk
-		$stmt = $mysqli->prepare("INSERT INTO AthletesData (gender, age, daynumber, month, WorkoutHours) VALUES (?, ?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO AthletesData (gender, age, month, TypeOfTraining, WorkoutHours, feeling) VALUES (?, ?, ?, ?, ?, ?)");
 		echo $mysqli->error;
-		$stmt->bind_param("siiii", $gender, $age, $daynumber, $month, $WorkoutHours);
+		$stmt->bind_param("siisis", $gender, $age, $month, $TypeOfTraining, $WorkoutHours, $feeling);
 		
 		if ($stmt->execute()) {
 			echo "salvestamine õnnestus";
@@ -115,10 +115,10 @@
 		
 		$mysqli = new mysqli($GLOBALS["serverHost"],$GLOBALS["serverUsername"],$GLOBALS["serverPassword"],$GLOBALS["database"]);
 		//käsk
-		$stmt = $mysqli->prepare("SELECT id, gender, age, daynumber, month, WorkoutHours FROM AthletesData");
+		$stmt = $mysqli->prepare("SELECT id, gender, age, month, TypeOfTraining, WorkoutHours, feeling FROM AthletesData");
 		echo $mysqli->error;
 		
-		$stmt->bind_result($id, $gender, $age, $daynumber, $month, $WorkoutHours);
+		$stmt->bind_result($id, $gender, $age, $month, $TypeOfTraining, $WorkoutHours, $feeling);
 		$stmt->execute();
 		
 		// array("Marliis", "O")
@@ -130,9 +130,11 @@
 			$person->id = $id;
 			$person->gender = $gender;
 			$person->age = $age;
-			$person->daynumber = $daynumber;
 			$person->month = $month;
+			$person->TypeOfTraining = $TypeOfTraining;
 			$person->WorkoutHours = $WorkoutHours;
+			$person->feeling = $feeling;
+
 			
 			//echo $color."<br>";
 			array_push($result, $person);

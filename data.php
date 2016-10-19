@@ -19,19 +19,21 @@
 		
 	}
 	
-		// var_dump($_POST);   kirjutan selle, et tekkinud vigu tekkida
+		// var_dump($_POST);   //kirjutan, kui on tekkinud viga, see aitab viga tuvastada
 
 	// ei ole tühjad väljad mida salvestada
 	if ( isset($_POST["gender"]) &&
 		 isset($_POST["age"]) &&
-		 isset($_POST["daynumber"]) &&
 		 isset($_POST["month"]) &&
+		 isset($_POST["TypeOfTraining"]) &&
 		 isset($_POST["WorkoutHours"]) &&
+		 isset($_POST["feeling"]) &&
 		 !empty($_POST["gender"]) &&
 		 !empty($_POST["age"]) &&
-		 !empty($_POST["daynumber"]) &&
 		 !empty($_POST["month"]) &&
-		 !empty($_POST["WorkoutHours"])
+		 !empty($_POST["TypeOfTraining"]) &&
+		 !empty($_POST["WorkoutHours"]) &&
+		 !empty($_POST["feeling"])
 	  ) {
 	  
 	  	//$daynumber = new DateTime($_POST['date']);
@@ -39,7 +41,7 @@
 		
 		$gender=cleanInput($_POST["gender"]);
 		
-		savePeople($_POST["gender"], $_POST["age"], $_POST["daynumber"], $_POST["month"], $_POST["WorkoutHours"]);
+		savePeople($_POST["gender"], $_POST["age"], $_POST["month"], $_POST["TypeOfTraining"], $_POST["WorkoutHours"], $_POST["feeling"]);
 	}
 	
 	$people = getAllPeople();
@@ -71,12 +73,19 @@
 	
 	<br><br>
 	<label><h3>Kuupäev</h3></label>
-	<input name="daynumber" type="daynumber" placeholder="Kuupäev">
-	<input name="month" type="month" placeholder="Kuu">
+	<input name="month" type="month" placeholder="Kuupäev">
+	
+	<br><br>
+	<label><h3>Treeningu laad</h3></label>
+	<input name="TypeOfTraining" type="TypeOfTraining" placeholder="Treeningu laad">
 	
 	<br><br>
 	<label><h3>Treeningu tunnid</h3></label>
-	<input name="WorkoutHours" type="workouthours">
+	<input name="WorkoutHours" type="WorkoutHours" placeholder="Treeningu tunnid">
+	
+	<br><br>
+	<label><h3>Enesetunne</h3></label>
+	<input name="feeling" type="feeling" placeholder="Enesetunne">
 	
 	<br><br>
 	<input type="submit" value="Salvesta">
